@@ -21,9 +21,9 @@ tags:
 
 ---
 
-这个站点是直接 Folk [黄玄的Blog](https://github.com/Huxpro/huxpro.github.io) 在GitHub上的项目代码创建起来的。感谢大牛无私的开源精神，小弟这边先行谢过（虽然人家也看不到）。
+这个站点是直接 Folk [黄玄的Blog](https://github.com/Huxpro/huxpro.github.io) 在 GitHub 上的项目代码创建起来的。感谢大牛无私的开源精神，小弟这边先行谢过（虽然人家也看不到）。
 
-今天只是初步搭建，具体内容会在今后陆续补充。一般来说这里应该有写一写搭建 GitHub 的辛酸历程，但是我并不想，可能就是因为懒吧。Oh yeah~
+今天只是初步搭建，具体内容会在今后陆续补充。一般来说这里应该有写一写搭建 GitHub Pages 的辛酸历程，但是我并不想，可能就是因为懒吧。Oh yeah~
 
 
 —— Aaron 记于 2017.12.18
