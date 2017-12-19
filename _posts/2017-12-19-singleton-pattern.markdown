@@ -35,15 +35,15 @@ Aaron 最近被 [萌姐](https://weibo.com/zhangmenggyl) 各种安利早起的�
 
 **要点**
 
-- [x] 某个类只能有一个实例
-- [x] 它必须自行创建这个实例
-- [x] 它必须自行向整个系统提供这个实例
+- 某个类只能有一个实例
+- 它必须自行创建这个实例
+- 它必须自行向整个系统提供这个实例
 
 <br />
 
 ### 2. 模式类图
 
-![cmd-markdown-logo](https://www.zybuluo.com/static/img/logo.png)
+![cmd-markdown-logo](/img/in-post/designpattern/single-1.png)
 
 <br />
 
