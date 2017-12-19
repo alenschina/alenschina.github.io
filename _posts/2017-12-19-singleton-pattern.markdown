@@ -43,7 +43,7 @@ Aaron 最近被 [萌姐](https://weibo.com/zhangmenggyl) 各种安利早起的�
 
 ### 2. 模式类图
 
-<img class="shadow" src="/img/in-post/designpattern/single-1.png" width="260">
+<img class="shadow" src="../img/in-post/designpattern/single-1.png" width="260">
 <br />
 
 ### 3. 模式角色
