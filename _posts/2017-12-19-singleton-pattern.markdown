@@ -77,7 +77,56 @@ Singleton 类的**构造函数是 private** 的，这是为了禁止从 Singleto
 
 ### 5. 延展阅读
 
+**“懒汉式”和“饿汉式”**
 
+所谓“懒汉”和“饿汉”的区别，在于创建单例对象的时间不同。前文的代码就是“饿汉式”的实现，无论你是否需要这个实例，Singleton 类都会在加载时创建它。
+
+下面我们来看一下“饿汉式”的实现：
+```java
+public class Singleton {
+
+    private static Singleton singleton = null;
+
+    private Singleton() {
+        System.out.println("Create a singleton");
+    }
+
+    public static Singleton getSingleton() {
+        if (singleton == null) {
+            singleton = new Singleton();
+        }
+        return singleton;
+    }
+}
+```
+以上代码中，Singleton 类只会在真正需要这个实例的时候才会创建这个它。
+
+
+**多线程情况下使用 Singleton 模式**
+
+```java
+public class Singleton {
+
+    private static Singleton singleton = null;
+
+    private Singleton() {
+        System.out.println("Create a singleton");
+    }
+
+    public static Singleton getSingleton() {
+        if (singleton == null) {
+            synchronized (Singleton.class) {
+                if (singleton == null) {
+                    singleton = new Singleton();
+                }
+            }
+        }
+
+        return singleton;
+    }
+}
+```
+在多线程的情况下，由于同一进程的多个线程共享同一片存储空间，所以可能导致 Singleton 模式被破坏。遇到这样的情况时，我们可以使用 Java 的 synchronize 机制有效避免了同一个数据对象被多个线程同时访问。
 
 
 
