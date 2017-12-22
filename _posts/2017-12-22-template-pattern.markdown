@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "设计模式 -- 把具体处理交给子类"
-subtitle:   " \"Singleton Pattern\""
+subtitle:   " \"Template Method Pattern\""
 date:       2017-12-22 21:00:00
 author:     "Aaron"
 header-img: "img/post-bg-2015.jpg"
@@ -88,7 +88,7 @@ public class CharDisplay extends AbstractDisplay {
 }
 ```
 调用方式
-```
+```java
 AbstractDisplay charDisplay = new CharDisplay('A');
 charDisplay.display();
 ```
@@ -136,7 +136,7 @@ public class StringDisplay extends AbstractDisplay {
 }
 ```
 调用方式
-```
+```java
 AbstractDisplay stringDisplay = new StringDisplay("Hello world");
 stringDisplay.display();
 ```
