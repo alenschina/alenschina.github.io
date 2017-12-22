@@ -166,6 +166,6 @@ Template method 的优点显而易见，由于在父类的模板方法中已经�
 
 **父类与子类的一致性**
 
-在实例代码中，无论是 Chardisplay 的实例还是 StringDisplay 的实例，都是保存在 AbstractDisplay 类型变量中的，然后再来调用 display 方法。使用父类型保存子类型的优点是，即使没有用 instanceof 等指定子类的种类，程序也可以正常工作。这种原则成为**里氏替换原则**（The Liskov Substitution Priciple, LSP）。
+在实例代码中，无论是 CharDisplay 的实例还是 StringDisplay 的实例，都是保存在 AbstractDisplay 类型变量中的，然后再来调用 display 方法。使用父类型保存子类型的优点是，即使没有用 instanceof 等指定子类的种类，程序也可以正常工作。这种原则成为**里氏替换原则**（The Liskov Substitution Priciple, LSP）。
 
 <br />
