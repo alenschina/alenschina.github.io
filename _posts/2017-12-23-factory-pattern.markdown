@@ -84,7 +84,7 @@ public class IDCard extends Product {
     IDCard(String owner, int serial) {
         this.owner = owner;
         this.serial = serial;
-        System.out.println("create card for " + owner + "(" + serial + ")");
+        System.out.println("create card for " + owner + " (" + serial + ")");
     }
 
     @Override
@@ -142,9 +142,9 @@ idCard3.use();
 
 输出结果
 ```
-create card for Aaron(1000)
-create card for Tom(1001)
-create card for Becky(1002)
+create card for Aaron (1000)
+create card for Tom (1001)
+create card for Becky (1002)
 Aaron: use this card (1000)
 Tom: use this card (1001)
 Becky: use this card (1002)
