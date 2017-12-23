@@ -5,7 +5,7 @@ subtitle:   " \"Template Method Pattern\""
 date:       2017-12-22 21:00:00
 author:     "Aaron"
 header-img: "img/post-bg-2015.jpg"
-catalog: true
+catalog: false
 tags:
     - 设计模式
 ---
