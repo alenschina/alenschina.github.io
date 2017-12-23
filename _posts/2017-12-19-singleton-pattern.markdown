@@ -48,7 +48,7 @@ Aaron 最近被 [萌姐](https://weibo.com/zhangmenggyl) 各种安利早起的�
 
 ### 3. 模式角色
 
-> * **Singleton**
+> **Singleton**
 在 Singleton 模式中，只有 Singleton 这一个角色。Singleton 角色有一个返回唯一实例的 static 方法。该方法总会返回同一个实例。
 
 <br />

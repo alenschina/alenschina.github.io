@@ -27,8 +27,8 @@ tags:
 
 ### 3. 模式角色
 
-> * **AbstractClass** AbstractClass 负责实现模板，同时负责声明模板中的抽象方法。这些抽象方法由子类 ConcreteClass 角色负责实现。
-> * **ConcreteClass** ConcreteClass 负责实现 AbstractClass 角色中定义的抽象方法。
+> **AbstractClass** AbstractClass 负责实现模板，同时负责声明模板中的抽象方法。这些抽象方法由子类 ConcreteClass 角色负责实现。
+> **ConcreteClass** ConcreteClass 负责实现 AbstractClass 角色中定义的抽象方法。
 <br />
 
 ### 4. 代码示例

@@ -26,13 +26,13 @@ tags:
 
 ### 3. 模式角色
 
-> * **Creator**
+> **Creator**
 
-> * **Product**
+> **Product**
 
-> * **ConcreteProduct**
+> **ConcreteProduct**
 
-> * **ConcreteCreator**
+> **ConcreteCreator**
 
 <br />
 
