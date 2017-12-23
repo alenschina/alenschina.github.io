@@ -21,7 +21,7 @@ tags:
 
 ### 2. 模式类图
 
-<img class="shadow" src="/img/in-post/factorypattern/factory-1.png" width="260">
+<img class="shadow" src="/img/in-post/factorypattern/factory-1.png" width="800">
 <br />
 
 ### 3. 模式角色
