@@ -21,7 +21,7 @@ tags:
 
 ### 2. 模式类图
 
-<img class="shadow" src="/img/in-post/factorypattern/factory-1.png" width="600">
+<img class="shadow" src="/img/in-post/factorypattern/factory-1.png" width="400">
 <br />
 
 ### 3. 模式角色
@@ -46,6 +46,7 @@ ConcreteCreator 角色负责生成具体的产品实例。
 我们先定义一个 Product 角色，作为一个抽象类，它只定义要处理的接口。
 
 > Product.java
+
 ```java
 public abstract class Product {
     public abstract void use();
@@ -56,6 +57,7 @@ public abstract class Product {
 而 createProduct 和 registerProduct 两个抽象方法的具体实现则完全由 Factory 的子类决定。
 
 > Creator.java
+
 ```java
 public abstract class Factory {
     public Product create(String owner){
@@ -73,6 +75,7 @@ public abstract class Factory {
 有了以上两个抽象类，我们现在就需要为他们添加实现子类，负责具体逻辑的实现。
 
 > IDCard.java
+
 ```java
 public class IDCard extends Product {
     private String owner;
@@ -100,6 +103,7 @@ public class IDCard extends Product {
 ```
 
 > IDCardFactory.java
+
 ```java
 public class IDCardFactory extends Factory {
     public int serial = 1000;
