@@ -140,8 +140,6 @@ idCard2.use();
 idCard3.use();
 ```
 
-<br />
-
 输出结果
 ```
 create card for Aaron(1000)
@@ -151,5 +149,7 @@ Aaron: use this card (1000)
 Tom: use this card (1001)
 Becky: use this card (1002)
 ```
+
+<br />
 
 ### 5. 延展阅读
