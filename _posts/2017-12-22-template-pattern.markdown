@@ -37,7 +37,7 @@ tags:
 
 我们先定义一个抽象类 AbstractDisplay，这个类会定义一个display方法，而这个方法会依次调用 open 、print 、 close 这3个方法。虽然这3个都被声明了，但是并没有方法体实现。在这里，调用抽象方法的 display 方法就是**模板方法**。
 
-> * AbstractDisplay.java
+> AbstractDisplay.java
 
 ```java
 public abstract class AbstractDisplay {
@@ -60,7 +60,7 @@ public abstract class AbstractDisplay {
 
 之后，我们为打印字符和字符串分别定义各自的实现类 CharDisplay 和 StringDisplay
 
-> * CharDisplay.java
+> CharDisplay.java
 
 
 ```java
@@ -98,7 +98,7 @@ charDisplay.display();
 <<AAAAA>>
 ```
 
-> * StringDisplay.java
+> StringDisplay.java
 
 ```java
 public class StringDisplay extends AbstractDisplay {
