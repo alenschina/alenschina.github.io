@@ -30,7 +30,7 @@ Abstract factory 的设计中，不仅有“抽象工厂”，还有“抽象产
 <br />
 
 ### 2. 模式类图
-TODO
+<img class="shadow" src="/img/in-post/abstractfactorypattern/abstractfactory-1.png" width="400">
 
 <br />
 
