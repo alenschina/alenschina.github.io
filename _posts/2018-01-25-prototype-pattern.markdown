@@ -122,7 +122,7 @@ public class UnderlinePen extends Product {
 
 > Manager.java
 
-Manager 类扮演了 Client 的角色。在这个例子中，TODO。。。
+Manager 类扮演了 Client 的角色。在这个例子中，register 方法将 Product 接口的实现类注册到一个 Map 中，create 方法将调用某个 Product 接口的实现类的 createClone 方法创建这个实例的备份。
 
 ```java
 public class Manager {
@@ -138,6 +138,43 @@ public class Manager {
     }
 }
 ```
+
+> Main.java
+
+最后在 Main 方法中生成 Manager 的实例，在 Manager 的实例中注册 MessageBox 和 UnderlinePen 的实例。然后通过 create 方法克隆出 MessageBox 和 UnderlinePen 的实例。
+
+```java
+public class Main {
+    private static final String STRONG_MESSAGE = "strong message";
+    private static final String WARN_MESSAGE = "warn message box";
+
+    public static void main(String[] args) {
+        Manager manager = new Manager();
+
+        UnderlinePen upen = new UnderlinePen('-');
+        MessageBox mbox = new MessageBox('*');
+
+        manager.register(STRONG_MESSAGE, upen);
+        manager.register(WARN_MESSAGE, mbox);
+
+        Product p1 = manager.create(STRONG_MESSAGE);
+        p1.use("Hello world");
+        Product p2 = manager.create(WARN_MESSAGE);
+        p2.use("Hello world");
+
+    }
+}
+```
+
+### 5. 延展阅读
+
+**clone 方法在哪里定义？**
+
+细心的同学可能会发现，Product 抽象类虽然实现了 Cloneable 接口，但事实上并没有实现它的任何方法，而是直接调用了 clone() 方法。这是为什么呢？
+
+因为提到 Cloneable 接口，很容易让人有一个误区，认为 clone 方法是声明在 Cloneable 接口中的。 但实际上， clone 方法是定义在 java.lang.Object 中的，所以所有的 Java 类都继承了 clone 方法。
+
+Cloneable 接口中并没有声明任何方法。它只是被用来标记“可以使用 clone 方法进行复制”的。这样的接口被称为**标记接口( marker interface )**。
 
 
 
