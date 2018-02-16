@@ -2,7 +2,7 @@
 layout:     post
 title:      "基于 Docker for Mac 的 Kubernetes 环境部署"
 subtitle:   " \"Kubernetes in Docker for Mac\""
-date:       2017-12-18 20:00:00
+date:       2018-02-16 20:00:00
 author:     "Aaron"
 header-img: "img/post-bg-2015.jpg"
 catalog: false
