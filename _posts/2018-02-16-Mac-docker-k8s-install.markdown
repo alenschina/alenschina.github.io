@@ -28,7 +28,7 @@ tags:
 
 [Get Docker](https://store.docker.com/editions/community/docker-ce-desktop-mac)
 
-<img class="shadow" src="/img/in-post/dockerk8sinstall/k8s-running.png" width="400">
+<img class="shadow" src="/img/in-post/dockerk8sinstall/k8s-download.png" width="400">
 
 Docker 到安装就不赘述了，没有什么难度。
 
@@ -50,7 +50,7 @@ $ polipo socksParentProxy=127.0.0.1:1080 proxyAddress=“192.168.31.109”
 
 **注意：启动 polipo 后，请不要关闭它的命令窗口。**
 
-<img class="shadow" src="/img/in-post/dockerk8sinstall/k8s-polipo.png" width="400">
+<img class="shadow" src="/img/in-post/dockerk8sinstall/k8s-polipo.png" width="600">
 
 现在，就可以为 Docker 配置 http 代理了。
 
