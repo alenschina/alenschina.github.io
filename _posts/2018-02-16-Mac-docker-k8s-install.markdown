@@ -67,4 +67,21 @@ $ polipo socksParentProxy=127.0.0.1:1080 proxyAddress=“192.168.31.109”
 $ kubectl get namespaces
 ```
 
+### 3. 启动 Kubernetes Dashboard
 
+Kubernetes Dashboard 是 k8s 基于 web 的控制中心。安装完 k8s 后，第一个自然想到先去安装可视化控制台。
+
+只需一句简单的命令就可以部署 Dashboard
+```
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+```
+
+然后是一个更简单的命令，建立访问 Dashboard 群组的安全通道
+```
+kubectl proxy
+```
+
+现在你就可以访问你的 k8s Dashboard 了
+[http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
+
+<img class="shadow" src="/img/in-post/dockerk8sinstall/k8s-dashboard.png" width="600">
