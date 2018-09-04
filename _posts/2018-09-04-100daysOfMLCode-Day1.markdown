@@ -18,19 +18,21 @@ tags:
 
 第一步：导入需要的库
 
-> Numpy是数学方法库
+> Numpy 是数学方法库
+
 ```python
 import numpy as np
 ```
 
-> pandas是引入以及处理数据集合的库
+> pandas 是引入以及处理数据集合的库
+
 ```python
 import pandas as pd
 ```
 
 第二步：导入数据集合
 
-> 使用pandas的read_csv方法引入Data.csv文件作为数据集合
+> 使用 pandas 的 read_csv 方法引入 Data.csv 文件作为数据集合
 
 ```python
 dataset = pd.read_csv('Data.csv')
@@ -55,7 +57,7 @@ y = dataset.iloc[:, 3].values
 from sklearn.preprocessing import Imputer
 ```
 
-> 使用sklearn.preprocessing中的Imputer类来完成数据填充，这里使用取均值的策略
+> 使用 sklearn.preprocessing 中的 Imputer 类来完成数据填充，这里使用取均值的策略
 
 ```python
 imputer = Imputer(missing_values='NaN', strategy='mean', axis=0)
@@ -73,7 +75,7 @@ X[:, 1:3] = imputer.transform(X[:, 1:3])
 from sklearn.preprocessing import LabelEncoder
 ```
 
-> 使用 sklearn.preprocessing的LabelEncoder类来编码标签值
+> 使用 sklearn.preprocessing 的 LabelEncoder 类来编码标签值
 
 ```python
 labelencoder_X = LabelEncoder()
@@ -88,7 +90,7 @@ X[:, 0] = labelencoder_X.fit_transform(X[:, 0])
 from sklearn.cross_validation import train_test_split
 ```
 
-> 使用 sklearn.cross_validation的train_test_split类来编码标签值， 取20%的测试集合和80%的训练集合
+> 使用 sklearn.cross_validation 的 train_test_split 类来编码标签值， 取20%的测试集合和80%的训练集合
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
