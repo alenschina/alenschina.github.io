@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Day 1 - 数据处理"
+title:      "100天机器学习大作战 Day 1 - 数据预处理"
 subtitle:   ""
 date:       2018-09-04 19:00:00
 author:     "Aaron"
@@ -11,8 +11,8 @@ tags:
 ---
 
 
-## 100天机器学习大作战 
-### 第一天 数据预处理
+
+## 第一天 数据预处理
 
 <br/>
 
@@ -92,6 +92,24 @@ from sklearn.cross_validation import train_test_split
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+```
+
+第六步：特征缩放
+
+大多数机器学习算法使用欧式距离来衡量两个数据点的的特征变化。相比于低量级特征，高量级特征会在距离计算中占有更大的权重。可以通过特征标准化或者Z分数正则化来解决。
+
+> 引入需要的库
+
+```python
+from sklearn.preprocessing import StandardScaler
+```
+
+> 使用 sklearn.preprocessing 的 StandardScaler 类进行特征标准化
+
+```python
+sc_X = StandardScaler()
+X_train = sc_X.fit_transform(X_train)
+X_test = sc_X.fit_transform(X_test)
 ```
 
 
