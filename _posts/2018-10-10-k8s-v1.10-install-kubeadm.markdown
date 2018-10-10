@@ -1,0 +1,357 @@
+---
+layout:     post
+title:      "Ubuntu16.04 使用 kubeadm 部署 kubernetes 1.10.0"
+subtitle:   " \"Deploy kubernetes in Ubuntu16.04 by kubeadm\""
+date:       2018-10-10 10:30:00
+author:     "Aaron"
+header-img: "img/post-bg-2015.jpg"
+catalog: false
+tags:
+    - Kubernetes 求生手册
+---
+
+
+---
+## 正文
+
+
+### 系统环境初始化
+
+#### 0. 更新apt源
+```
+sudo apt update
+```
+如果更新过程出错，可能需要运行软件包管理命令
+```
+sudo dpkg --configure -a
+```
+
+#### 0. 添加用户
+第一步：添加用户
+```
+sudo adduser new_username
+```
+
+第二步：赋予用户sudo权限
+```
+cat /etc/group | grep 'sudo'
+
+usermod -G 27 new_username
+```
+
+#### 1. 修改主机名称
+第一步：ubuntu主机名位于/etc/hostname里，将其修改为自己需要的名称
+```
+sudo vim /etc/hostname
+```
+第二步：修改/etc/hosts文件，将其中127.0.1.1对应的主机名更改为新的主机名，与/etc/hostname里的主机名一致
+```
+sudo vim /etc/hosts
+```
+第三步：重启服务器
+```
+sudo reboot
+```
+
+#### 2.生成秘钥
+```
+ssh-keygen -t rsa
+
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+```
+将 master 的 ssh key 复制到 node 服务器的 authorized_keys 中
+
+
+
+#### 3. 安装 Docker
+
+第一步：卸载可能存在的旧版本
+```
+sudo apt-get remove docker docker-engine docker-ce docker.io
+```
+第二步：更新apt索引包
+```
+sudo apt-get update
+```
+第三步：安装以下包以使apt可以通过HTTPS使用存储库
+```
+sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+```
+第四步：添加Docker官方的GPG密钥
+```
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+```
+第五步：写入软件包源信息
+
+| ubuntu version | Repository |
+|--------|--------|
+| Precise 12.04 (LTS)  |  deb https://apt.dockerproject.org/repo ubuntu-precise main|
+| Trusty 14.04 (LTS)  |  deb https://apt.dockerproject.org/repo ubuntu-trusty main  |
+| Wily 15.10  |  deb https://apt.dockerproject.org/repo ubuntu-wily main            |
+| Xenial 16.04 (LTS)  |  deb https://apt.dockerproject.org/repo ubuntu-xenial main  |
+```
+sudo add-apt-repository '[Repository]' 
+sudo add-apt-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
+```
+第六步：再次更新apt索引包
+```
+sudo apt-get update
+```
+第七步：列出Docker-engine版本
+```
+sudo apt-cache policy docker-engine
+```
+第八步：从上面Docker版本中选择安装Docker
+```
+sudo apt-get -y install docker-engine=[VERSION] --allow-unauthenticated
+sudo apt-get -y install docker-engine=1.13.1-0~ubuntu-xenial --allow-unauthenticated
+```
+第九步：验证Docker服务
+```
+systemctl status docker
+```
+
+第十步：增加阿里云加速（国内服务器）
+```
+sudo vim /etc/systemd/system/multi-user.target.wants/docker.service
+#找到ExecStart, 在fd:// 后面加上 --registry
+ExecStart=/usr/bin/docker -H fd:// --registry-mirror=https://6l2qos50.mirror.aliyuncs.com
+```
+```
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+第十一步：为docker配置翻墙（国内服务器）
+```
+sudo mkdir -p /etc/systemd/system/docker.service.d
+sudo vim /etc/systemd/system/docker.service.d/https-proxy.conf
+```
+```
+[Service]
+Environment="HTTP_PROXY=http://192.168.14.174:8123/"  "HTTPS_PROXY=https://192.168.14.174:8123/"  "NO_PROXY=localhost,127.0.0.1,6l2qos50.mirror.aliyuncs.com,192.168.14.190"
+```
+```
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+systemctl show --property=Environment docker
+```
+
+第十二步：stable docker环境安装python(非stable环境可略过)
+```
+sudo apt-get install python
+```
+
+第十三步：运行docker without sudo (optional) --- 将当前用户加入docker组。需要登出再登入才有效
+```
+sudo usermod -aG docker $(whoami)
+```
+
+
+#### 4. 安装 Kubernetes 环境
+第一步：切换root用户
+```
+sudo su
+```
+
+第二步：添加 Google cloud 官方的GPG密钥
+```
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+```
+
+第三步：写入 kubernetes 软件包资源信息
+```
+cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+deb http://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+
+apt-get update
+```
+
+第四步：安装 kubernetes 软件包
+> Master
+```
+apt-get install -y kubelet=1.8.2-00
+apt-get install -y kubectl=1.8.2-00
+apt-get install -y kubeadm=1.8.2-00
+apt-get install -y kubernetes-cni=？？？
+```
+> Node
+```
+apt-get install -y kubelet=1.8.2-00
+apt-get install -y kubectl=1.8.2-00
+apt-get install -y kubeadm=1.8.2-00
+apt-get install -y kubernetes-cni=？？？
+apt-get install -y nfs-common=？？？
+```
+
+第五步：修改 kubeadm.conf
+```
+sudo vim /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+```
+为KUBELET_KUBECONFIG_ARGS添加参数：--fail-swap-on=false
+
+第六步：重启 kubelet
+```
+systemctl daemon-reload
+
+systemctl restart kubelet
+```
+确保kubelet成功开启，否则无法成功ready
+
+
+#### 5. 初始化 Master 节点
+
+第一步
+```
+sudo kubeadm init --kubernetes-version=v1.10.0 --token-ttl=0 --skip-preflight-checks --pod-network-cidr=192.168.0.0/16
+```
+
+第二步：初始化网络
+```
+mkdir -p $HOME/.kube
+
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+访问 https://kubernetes.io/docs/concepts/cluster-administration/addons/ 选择一种网络模式
+```
+kubectl apply -f [podnetwork].yaml
+```
+Calico for example
+```
+kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/kubeadm/1.7/calico.yaml
+```
+
+
+#### 6. 初始化 Node 节点
+
+第一步：获取token
+
+在kubemaster上查找
+```
+kubeadm token list
+```
+若没有token，则生成一个
+```
+kubeadm token create
+```
+
+第二步：获取CA key
+
+在kubemaster上通过第三方工具计算
+```
+openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
+```
+
+第三步：通过kubeadm命令将节点加入集群
+```
+sudo kubeadm join --token [token] --skip-preflight-checks --discovery-token-ca-cert-hash sha256:[CA key] [kubemaster_host]:[kubemaster_ip]
+
+```
+
+第四步：赋予kubectl命令权限
+
+创建目录
+```
+mkdir -p $HOME/.kube
+```
+从kubemaster上拷贝admin config文件
+```
+sudo scp /etc/kubernetes/admin.conf your_server:$HOME/.kube/config
+```
+设置权限
+```
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+
+#### 7.配置Dashboard（nodeport模式）
+
+第一步：下载dashboard配置文件
+```
+wget https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+```
+
+第二步：通过nodeport暴露服务
+
+增加 type: NodePort
+```yaml
+# ------------------- Dashboard Service ------------------- #
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard
+  namespace: kube-system
+spec:
+  type: NodePort
+  ports:
+    - port: 443
+      targetPort: 8443
+  selector:
+    k8s-app: kubernetes-dashboard
+```
+
+第三步：安装 Dashboard
+```
+kubectl create -f kubernetes-dashboard.yaml
+```
+
+第四步：创建 Dashboard 账号集群管理权限文件
+
+kubernetes-dashboard-admin.rbac.yaml
+```yaml
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard-admin
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: kubernetes-dashboard-admin
+  labels:
+    k8s-app: kubernetes-dashboard
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: kubernetes-dashboard-admin
+  namespace: kube-system
+```
+
+第五步：运行 Dashboard 账号集群管理权限文件
+```
+kubectl create -f kubernetes-dashboard-admin.rbac.yaml
+```
+
+第六步：获取kubernete-dashboard-admin的token
+```
+kubectl -n kube-system get secret | grep kubernetes-dashboard-admin
+
+kubectl describe -n kube-system secret/kubernetes-dashboard-admin-token-ddskx
+```
+记录这里的token，用于登陆Dashboard
+
+第六步：找到 Dashboard 端口号，尝试访问
+```
+kubectl get svc -n kube-system
+```
+
+打开浏览器，访问https://{cluster ip}:{nodeport}/#!/login，选择令牌，输入刚才的token即可进入 
+
+
+
+
+
+
