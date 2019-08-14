@@ -1,18 +1,18 @@
 ---
-layout:     post
-title:      "设计模式 -- 分离功能层次结构和实现层次结构"
-subtitle:   " \"Bridge Pattern\""
-date:       2018-09-25 15:00:00
-author:     "Aaron"
-header-img: "img/post-bg-2015.jpg"
-catalog: false
-tags:
-    - 设计模式
----
-
-
----
-## 正文
+     layout:     post
+     title:      "设计模式 -- 分离功能层次结构和实现层次结构"
+     subtitle:   " \"Bridge Pattern\""
+     date:       2018-09-25 15:00:00
+     author:     "Aaron"
+     header-img: "img/post-bg-2015.jpg"
+     catalog: false
+     tags:
+         - 设计模式
+     ---
+     
+     
+     ---
+     ## 正文
 
 
 ### 1. 概述
