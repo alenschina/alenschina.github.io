@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "设计模式 -- 把生成实例交给子类"
-subtitle:   " \"Factory Method Pattern\""
+subtitle:   " \"Factory Pattern\""
 date:       2017-12-23 15:00:00
 author:     "Aaron"
 header-img: "img/post-bg-2015.jpg"
