@@ -171,7 +171,7 @@ public class Directory extends Entry {
 
 ```java
 public class ListVisitor extends Visitor {
-    private String currentDir;
+    private String currentDir = "";
 
     @Override
     public void visit(File file) {
