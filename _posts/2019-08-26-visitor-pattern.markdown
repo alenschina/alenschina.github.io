@@ -243,27 +243,27 @@ public class Main {
 结果：
 ```text
 Making root entries
-null/root( 30000 )
-null/root/bin( 30000 )
-null/root/bin/vi( 10000 )
-null/root/bin/latex( 20000 )
-null/root/tmp( 0 )
-null/root/usr( 0 )
+/root( 30000 )
+/root/bin( 30000 )
+/root/bin/vi( 10000 )
+/root/bin/latex( 20000 )
+/root/tmp( 0 )
+/root/usr( 0 )
 
 Making user entries
-null/root( 31500 )
-null/root/bin( 30000 )
-null/root/bin/vi( 10000 )
-null/root/bin/latex( 20000 )
-null/root/tmp( 0 )
-null/root/usr( 1500 )
-null/root/usr/aaron( 100 )
-null/root/usr/aaron/a.html( 100 )
-null/root/usr/tom( 600 )
-null/root/usr/tom/b.txt( 400 )
-null/root/usr/tom/c.xml( 200 )
-null/root/usr/lucy( 800 )
-null/root/usr/lucy/d.csv( 800 )
+/root( 31500 )
+/root/bin( 30000 )
+/root/bin/vi( 10000 )
+/root/bin/latex( 20000 )
+/root/tmp( 0 )
+/root/usr( 1500 )
+/root/usr/aaron( 100 )
+/root/usr/aaron/a.html( 100 )
+/root/usr/tom( 600 )
+/root/usr/tom/b.txt( 400 )
+/root/usr/tom/c.xml( 200 )
+/root/usr/lucy( 800 )
+/root/usr/lucy/d.csv( 800 )
 ```
 
 <br />
