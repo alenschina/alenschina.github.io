@@ -95,6 +95,7 @@ public abstract class Entry implements Element {
 接下去的 File 和 Directory 类。作为数据结构本身，它们和 composite 模式中一样，但是对数据的输出不在由其本身提供功能，而是通过 accept 方法，交给 visitor 来处理。
 
 > File.java
+
 ```java
 public class File extends Entry {
     private String name;
