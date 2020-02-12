@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "设计模式 -- 观察者窗口"
+subtitle:   " \"Observer Pattern\""
+date:       2020-02-12 17:00:00
+author:     "Aaron"
+header-img: "img/post-bg-2015.jpg"
+catalog: false
+tags:
+    - 设计模式
+---
+
 ### 1. 概述
 
 观察者模式是一种被广泛应用的模式。Observer 即观察者，当被观察对象的状态变化时，就会通知观察者做出相应的处理。
